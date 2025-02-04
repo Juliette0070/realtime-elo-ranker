@@ -6,20 +6,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.RankingService = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
-const ranking_service_1 = require("./ranking/ranking.service");
-let AppModule = class AppModule {
+let RankingService = class RankingService {
+    constructor() {
+        this.rankings = {};
+    }
+    getRanking(playerId) {
+        return this.rankings[playerId] ?? null;
+    }
+    updateRanking(playerId, newScore) {
+        this.rankings[playerId] = newScore;
+    }
+    getAllRankings() {
+        return this.rankings;
+    }
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
-    (0, common_1.Module)({
-        imports: [],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, ranking_service_1.RankingService],
-        exports: [ranking_service_1.RankingService],
-    })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+exports.RankingService = RankingService;
+exports.RankingService = RankingService = __decorate([
+    (0, common_1.Injectable)()
+], RankingService);
+//# sourceMappingURL=ranking.service.js.map
