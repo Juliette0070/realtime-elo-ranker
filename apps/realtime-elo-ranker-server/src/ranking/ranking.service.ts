@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PlayersService } from '../players/players.service';
+import { Player } from '../players/player.entity';
 
 @Injectable()
 export class RankingService {
-  private rankings: { [playerId: string]: number } = {}; // Stocke le classement en cache
-
   constructor(private readonly playersService: PlayersService) {}
 
   async updateElo(winnerId: number, loserId: number): Promise<void> {
@@ -26,15 +25,7 @@ export class RankingService {
     await this.playersService.updateElo(loser.id, loser.elo);
   }
 
-  getRanking(playerId: string): number | null {
-    return this.rankings[playerId] ?? null;
-  }
-
-  updateRanking(playerId: string, newScore: number): void {
-    this.rankings[playerId] = newScore;
-  }
-
-  getAllRankings(): { [playerId: string]: number } {
-    return this.rankings;
+  async getAllPlayersSortedByElo(): Promise<Player[]> {
+    return this.playersService.findAllSortedByElo();
   }
 }

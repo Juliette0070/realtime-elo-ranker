@@ -10,7 +10,8 @@ data_source_1.AppDataSource.initialize().then(() => {
 });
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    await app.listen(process.env.PORT ?? 3000);
+    app.enableCors();
+    await app.listen(process.env.PORT ?? 8080);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

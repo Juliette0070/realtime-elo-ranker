@@ -26,4 +26,8 @@ export class PlayersService {
   async updateElo(id: number, newElo: number): Promise<void> {
     await this.playerRepository.update(id, { elo: newElo });
   }
+
+  async findAllSortedByElo(): Promise<Player[]> {
+    return this.playerRepository.find({ order: { elo: 'DESC' } });
+  }
 }

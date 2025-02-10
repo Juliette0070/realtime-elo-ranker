@@ -15,7 +15,6 @@ const players_service_1 = require("../players/players.service");
 let RankingService = class RankingService {
     constructor(playersService) {
         this.playersService = playersService;
-        this.rankings = {};
     }
     async updateElo(winnerId, loserId) {
         const winner = await this.playersService.findOne(winnerId);
@@ -30,14 +29,8 @@ let RankingService = class RankingService {
         await this.playersService.updateElo(winner.id, winner.elo);
         await this.playersService.updateElo(loser.id, loser.elo);
     }
-    getRanking(playerId) {
-        return this.rankings[playerId] ?? null;
-    }
-    updateRanking(playerId, newScore) {
-        this.rankings[playerId] = newScore;
-    }
-    getAllRankings() {
-        return this.rankings;
+    async getAllPlayersSortedByElo() {
+        return this.playersService.findAllSortedByElo();
     }
 };
 exports.RankingService = RankingService;

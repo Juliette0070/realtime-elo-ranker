@@ -6,6 +6,7 @@ import { RankingService } from './ranking/ranking.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Player } from './players/player.entity';
 import { PlayersModule } from './players/players.module';
+import { RankingModule } from './ranking/ranking.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PlayersModule } from './players/players.module';
       synchronize: true, // ⚠️ En prod, remplacer par migrations
     }),
     PlayersModule,
+    RankingModule,
   ],
   controllers: [AppController],
   providers: [AppService, RankingService],

@@ -7,4 +7,5 @@ export declare class PlayersService {
     findAll(): Promise<Player[]>;
     findOne(id: number): Promise<Player | null>;
     updateElo(id: number, newElo: number): Promise<void>;
+    findAllSortedByElo(): Promise<Player[]>;
 }

@@ -34,6 +34,9 @@ let PlayersService = class PlayersService {
     async updateElo(id, newElo) {
         await this.playerRepository.update(id, { elo: newElo });
     }
+    async findAllSortedByElo() {
+        return this.playerRepository.find({ order: { elo: 'DESC' } });
+    }
 };
 exports.PlayersService = PlayersService;
 exports.PlayersService = PlayersService = __decorate([

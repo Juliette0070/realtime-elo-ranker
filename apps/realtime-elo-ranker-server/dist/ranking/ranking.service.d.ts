@@ -1,12 +1,8 @@
 import { PlayersService } from '../players/players.service';
+import { Player } from '../players/player.entity';
 export declare class RankingService {
     private readonly playersService;
-    private rankings;
     constructor(playersService: PlayersService);
     updateElo(winnerId: number, loserId: number): Promise<void>;
-    getRanking(playerId: string): number | null;
-    updateRanking(playerId: string, newScore: number): void;
-    getAllRankings(): {
-        [playerId: string]: number;
-    };
+    getAllPlayersSortedByElo(): Promise<Player[]>;
 }
