@@ -19,7 +19,7 @@ exports.PlayersModule = PlayersModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([player_entity_1.Player])],
         providers: [players_service_1.PlayersService],
-        controllers: [players_controller_1.PlayersController, players_service_1.PlayersService],
+        controllers: [players_controller_1.PlayersController],
         exports: [players_service_1.PlayersService],
     })
 ], PlayersModule);

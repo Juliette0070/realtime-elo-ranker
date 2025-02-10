@@ -14,7 +14,7 @@ import { PlayersModule } from './players/players.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'password',
+      password: '3424',
       database: 'elo_ranker',
       entities: [Player],
       synchronize: true, // ⚠️ En prod, remplacer par migrations

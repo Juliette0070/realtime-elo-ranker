@@ -8,11 +8,19 @@ exports.AppDataSource = new typeorm_1.DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
-    username: "user",
-    password: "password",
+    username: "postgres",
+    password: "3424",
     database: "elo_ranker",
-    synchronize: true,
+    schema: "public",
+    synchronize: false,
     logging: true,
     entities: [player_entity_1.Player],
+});
+exports.AppDataSource.initialize()
+    .then(() => {
+    console.log("Connexion à la base de données réussie");
+})
+    .catch((error) => {
+    console.error("Erreur de connexion à la base de données", error);
 });
 //# sourceMappingURL=data-source.js.map

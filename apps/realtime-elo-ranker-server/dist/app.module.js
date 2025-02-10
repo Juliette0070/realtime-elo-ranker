@@ -25,7 +25,7 @@ exports.AppModule = AppModule = __decorate([
                 host: 'localhost',
                 port: 5432,
                 username: 'postgres',
-                password: 'password',
+                password: '3424',
                 database: 'elo_ranker',
                 entities: [player_entity_1.Player],
                 synchronize: true,
