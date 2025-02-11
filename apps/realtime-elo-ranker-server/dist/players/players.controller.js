@@ -20,7 +20,7 @@ let PlayersController = class PlayersController {
         this.playersService = playersService;
     }
     async create(body) {
-        return this.playersService.create(body.name);
+        return this.playersService.create(body.id);
     }
     async findAll() {
         return this.playersService.findAll();

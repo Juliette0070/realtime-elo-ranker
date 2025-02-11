@@ -11,6 +11,9 @@ export class PlayersService {
   ) {}
 
   async create(name: string): Promise<Player> {
+    if (name !== "") {
+      throw new Error("Name should not be empty");
+    }
     const player = this.playerRepository.create({ name });
     return this.playerRepository.save(player);
   }

@@ -4,7 +4,7 @@ export declare class PlayersController {
     private readonly playersService;
     constructor(playersService: PlayersService);
     create(body: {
-        name: string;
+        id: string;
     }): Promise<Player>;
     findAll(): Promise<Player[]>;
     findOne(id: string): Promise<Player | null>;

@@ -7,8 +7,8 @@ export class PlayersController {
   constructor(private readonly playersService: PlayersService) {}
 
   @Post()
-  async create(@Body() body: { name: string }): Promise<Player> {
-    return this.playersService.create(body.name);
+  async create(@Body() body: { id: string }): Promise<Player> {
+    return this.playersService.create(body.id);
   }
 
   @Get()

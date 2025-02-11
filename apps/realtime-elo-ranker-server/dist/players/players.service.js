@@ -22,6 +22,9 @@ let PlayersService = class PlayersService {
         this.playerRepository = playerRepository;
     }
     async create(name) {
+        if (name !== "") {
+            throw new Error("Name should not be empty");
+        }
         const player = this.playerRepository.create({ name });
         return this.playerRepository.save(player);
     }
