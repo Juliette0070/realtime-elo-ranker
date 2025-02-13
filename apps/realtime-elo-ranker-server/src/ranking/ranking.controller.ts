@@ -1,6 +1,6 @@
 import { Controller, Get, Sse, MessageEvent, Post, Body } from '@nestjs/common';
 import { Observable, interval, from } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, concatMap } from 'rxjs/operators';
 import { RankingService } from './ranking.service';
 
 @Controller('api/ranking')
@@ -25,7 +25,21 @@ export class RankingController {
   events(): Observable<MessageEvent> {
     return interval(5000).pipe(
       switchMap(() => from(this.rankingService.getAllPlayersSortedByElo())),
-      map((ranking) => ({ data: { ranking } }))
+      concatMap((ranking: any) => 
+        from(ranking).pipe(
+          map((player: { id: string, rank: number }) => ({
+            id: Date.now().toString(),
+            event: 'message',
+            data: JSON.stringify({
+              type: "RankingUpdate",
+              player: {
+                id: player.id,
+                rank: player.rank
+              }
+            })
+          }))
+        )
+      )
     );
   }
 }

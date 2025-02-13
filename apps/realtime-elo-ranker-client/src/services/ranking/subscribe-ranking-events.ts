@@ -8,9 +8,29 @@ const URL = "/api/ranking/events";
  * @description This function is used to subscribe to ranking events. It expects for output messages to be of type RankingEvent.
  * 
  * @returns {EventSource} The event source to listen to ranking events
- */
+
 export default function subscribeRankingEvents(baseUrl: string): EventSource {
   // Subscribe to ranking events
   // ...
   return new EventSource(baseUrl + URL);
+} */
+
+
+export default function subscribeRankingEvents(baseUrl: string): EventSource {
+  const eventSource = new EventSource(baseUrl + "/api/ranking/events");
+
+  eventSource.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      console.log("Ranking update received:", data);
+    } catch (error) {
+      console.error("Error parsing ranking event:", error);
+    }
+  };
+
+  eventSource.onerror = (error) => {
+    console.error("SSE connection error:", error);
+  };
+
+  return eventSource;
 }

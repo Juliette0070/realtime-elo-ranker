@@ -28,7 +28,17 @@ let RankingController = class RankingController {
         await this.rankingService.updateElo(winnerId, loserId);
     }
     events() {
-        return (0, rxjs_1.interval)(5000).pipe((0, operators_1.switchMap)(() => (0, rxjs_1.from)(this.rankingService.getAllPlayersSortedByElo())), (0, operators_1.map)((ranking) => ({ data: { ranking } })));
+        return (0, rxjs_1.interval)(5000).pipe((0, operators_1.switchMap)(() => (0, rxjs_1.from)(this.rankingService.getAllPlayersSortedByElo())), (0, operators_1.concatMap)((ranking) => (0, rxjs_1.from)(ranking).pipe((0, operators_1.map)((player) => ({
+            id: Date.now().toString(),
+            event: 'message',
+            data: JSON.stringify({
+                type: "RankingUpdate",
+                player: {
+                    id: player.id,
+                    rank: player.rank
+                }
+            })
+        })))));
     }
 };
 exports.RankingController = RankingController;
