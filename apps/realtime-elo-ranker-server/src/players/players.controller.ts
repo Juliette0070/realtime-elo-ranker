@@ -7,8 +7,8 @@ export class PlayersController {
   constructor(private readonly playersService: PlayersService) {}
 
   @Post()
-  async create(@Body() body: { id: string }): Promise<Player> {
-    return this.playersService.create(body.id);
+  async createPlayer(@Body('id') id: string): Promise<Player> {
+    return this.playersService.create(id);
   }
 
   @Get()
@@ -18,6 +18,6 @@ export class PlayersController {
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Player | null> {
-    return this.playersService.findOne(Number(id));
+    return this.playersService.findOne(id);
   }
 }

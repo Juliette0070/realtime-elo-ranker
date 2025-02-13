@@ -1,12 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Player {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn() // On le met en clé primaire mais sans auto-incrément
+  id: string;
 
-  @Column()
-  name: string;
 
   @Column({ default: 1000 }) // Score de base ELO
   elo: number;

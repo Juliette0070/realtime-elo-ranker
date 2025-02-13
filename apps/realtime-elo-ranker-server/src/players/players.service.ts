@@ -10,23 +10,25 @@ export class PlayersService {
     private readonly playerRepository: Repository<Player>,
   ) {}
 
-  async create(name: string): Promise<Player> {
-    if (name !== "") {
-      throw new Error("Name should not be empty");
+  async create(id: string): Promise<Player> {
+    const existingPlayer = await this.playerRepository.findOne({ where: { id } });
+    if (existingPlayer) {
+      throw new Error("Player ID already exists");
     }
-    const player = this.playerRepository.create({ name });
+    const player = this.playerRepository.create({ id });
     return this.playerRepository.save(player);
   }
+  
 
   async findAll(): Promise<Player[]> {
     return this.playerRepository.find();
   }
 
-  async findOne(id: number): Promise<Player | null> {
+  async findOne(id: string): Promise<Player | null> {
     return this.playerRepository.findOneBy({ id });
   }
 
-  async updateElo(id: number, newElo: number): Promise<void> {
+  async updateElo(id: string, newElo: number): Promise<void> {
     await this.playerRepository.update(id, { elo: newElo });
   }
 

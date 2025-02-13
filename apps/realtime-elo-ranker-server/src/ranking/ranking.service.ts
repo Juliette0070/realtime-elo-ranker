@@ -6,7 +6,7 @@ import { Player } from '../players/player.entity';
 export class RankingService {
   constructor(private readonly playersService: PlayersService) {}
 
-  async updateElo(winnerId: number, loserId: number): Promise<void> {
+  async updateElo(winnerId: string, loserId: string): Promise<void> {
     const winner = await this.playersService.findOne(winnerId);
     const loser = await this.playersService.findOne(loserId);
 

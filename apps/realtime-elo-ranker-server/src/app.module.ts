@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Player } from './players/player.entity';
 import { PlayersModule } from './players/players.module';
 import { RankingModule } from './ranking/ranking.module';
+import { MatchModule } from './match/match.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { RankingModule } from './ranking/ranking.module';
     }),
     PlayersModule,
     RankingModule,
+    MatchModule,
   ],
   controllers: [AppController],
   providers: [AppService, RankingService],
