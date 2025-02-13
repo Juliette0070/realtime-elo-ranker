@@ -7,5 +7,5 @@ export class Player {
 
 
   @Column({ default: 1000 }) // Score de base ELO
-  elo: number;
+  rank: number;
 }

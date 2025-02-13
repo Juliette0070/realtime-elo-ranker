@@ -1,4 +1,4 @@
-import { Controller, Get, Sse, MessageEvent } from '@nestjs/common';
+import { Controller, Get, Sse, MessageEvent, Post, Body } from '@nestjs/common';
 import { Observable, interval, from } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { RankingService } from './ranking.service';
@@ -10,6 +10,15 @@ export class RankingController {
   @Get()
   async getRanking() {
     return this.rankingService.getAllPlayersSortedByElo();
+  }
+
+  // Mettre à jour le classement après un match
+  @Post('update')
+  async updateElo(
+    @Body('winnerId') winnerId: string,
+    @Body('loserId') loserId: string,
+  ): Promise<void> {
+    await this.rankingService.updateElo(winnerId, loserId);
   }
 
   @Sse('events')

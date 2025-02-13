@@ -5,6 +5,5 @@ export declare class MatchController {
     constructor(matchService: MatchService);
     createMatch(createMatchDto: CreateMatchDto): Promise<{
         message: string;
-        data: CreateMatchDto;
     }>;
 }

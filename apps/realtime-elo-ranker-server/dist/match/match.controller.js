@@ -21,7 +21,7 @@ let MatchController = class MatchController {
         this.matchService = matchService;
     }
     async createMatch(createMatchDto) {
-        return this.matchService.create(createMatchDto);
+        return this.matchService.createMatch(createMatchDto.winner, createMatchDto.loser, createMatchDto.draw);
     }
 };
 exports.MatchController = MatchController;

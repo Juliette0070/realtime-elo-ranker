@@ -18,7 +18,6 @@ export class PlayersService {
     const player = this.playerRepository.create({ id });
     return this.playerRepository.save(player);
   }
-  
 
   async findAll(): Promise<Player[]> {
     return this.playerRepository.find();
@@ -29,10 +28,10 @@ export class PlayersService {
   }
 
   async updateElo(id: string, newElo: number): Promise<void> {
-    await this.playerRepository.update(id, { elo: newElo });
+    await this.playerRepository.update(id, { rank: newElo });
   }
 
   async findAllSortedByElo(): Promise<Player[]> {
-    return this.playerRepository.find({ order: { elo: 'DESC' } });
+    return this.playerRepository.find({ order: { rank: 'DESC' } });
   }
 }

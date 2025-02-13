@@ -14,15 +14,15 @@ export class RankingService {
 
     const kFactor = 32;
     const expectedWinnerScore =
-      1 / (1 + Math.pow(10, (loser.elo - winner.elo) / 400));
+      1 / (1 + Math.pow(10, (loser.rank - winner.rank) / 400));
     const expectedLoserScore =
-      1 / (1 + Math.pow(10, (winner.elo - loser.elo) / 400));
+      1 / (1 + Math.pow(10, (winner.rank - loser.rank) / 400));
 
-    winner.elo = Math.round(winner.elo + kFactor * (1 - expectedWinnerScore));
-    loser.elo = Math.round(loser.elo + kFactor * (0 - expectedLoserScore));
+    winner.rank = Math.round(winner.rank + kFactor * (1 - expectedWinnerScore));
+    loser.rank = Math.round(loser.rank + kFactor * (0 - expectedLoserScore));
 
-    await this.playersService.updateElo(winner.id, winner.elo);
-    await this.playersService.updateElo(loser.id, loser.elo);
+    await this.playersService.updateElo(winner.id, winner.rank);
+    await this.playersService.updateElo(loser.id, loser.rank);
   }
 
   async getAllPlayersSortedByElo(): Promise<Player[]> {

@@ -36,10 +36,10 @@ let PlayersService = class PlayersService {
         return this.playerRepository.findOneBy({ id });
     }
     async updateElo(id, newElo) {
-        await this.playerRepository.update(id, { elo: newElo });
+        await this.playerRepository.update(id, { rank: newElo });
     }
     async findAllSortedByElo() {
-        return this.playerRepository.find({ order: { elo: 'DESC' } });
+        return this.playerRepository.find({ order: { rank: 'DESC' } });
     }
 };
 exports.PlayersService = PlayersService;
